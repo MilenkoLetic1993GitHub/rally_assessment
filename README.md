@@ -1,0 +1,16 @@
+- [Install Docker](https://www.docker.com/products/docker-desktop).
+- copy .env.example to .env. 
+- run docker run --rm -u "$(id -u):$(id -g)" -v $(pwd):/opt -w /opt laravelsail/php80-composer:latest composer install --ignore-platform-reqs
+- run ./vendor/bin/sail up -d
+- run ./vendor/bin/sail artisan key:generate
+- run ./vendor/bin/sail artisan migrate
+- run ./vendor/bin/sail artisan db:seed
+- run ./vendor/bin/sail artisan cache-json-api-data
+- test application with POSTMAN (or some similar tool) - add header "Accept: application/json" while testing
+
+-- Endpoints examples
+- base URL: [http://localhost](http://localhost)
+- GET users by ID: "api/user", parameters: "id" (array, required without email), "email" (email, required without id)
+- GET user by ID: "api/user/1" - "1" is user ID
+- GET user posts: "api/user/1/posts" - "1" is user ID, parameters: "title" (string, optional)
+- GET post comments: "api/post/1/comments" - "1" is post ID
